@@ -1,5 +1,4 @@
-X1,X2,X3,X4,X5,X6,X7,X8,X9
-NA,loc,species,treatment,animal_id,sl,size,activity,comment
+X1,loc,species,treatment,animal_id,sl,size,activity,comment
 1,LIRS 2014,ambon,CO2,64,56.98794481,big,8.147368421,"27min means of sml+lrg dur, from All Lizard activity data for JJ v2_7 Jun 2017.xlsx"
 2,LIRS 2014,ambon,CO2,65,38.2381647,big,10.50526316,"27min means of sml+lrg dur, from All Lizard activity data for JJ v2_7 Jun 2017.xlsx"
 3,LIRS 2014,ambon,CO2,67,39.30947208,big,6.513043478,"27min means of sml+lrg dur, from All Lizard activity data for JJ v2_7 Jun 2017.xlsx"
@@ -282,7 +281,7 @@ NA,loc,species,treatment,animal_id,sl,size,activity,comment
 280,LIRS 2016,acantho,CO2,154,15,big,41.53783784,37min means of sml+lrg dur; from Activity for JJ stats.xlsx
 281,LIRS 2016,acantho,CO2,153,15,big,47.96944444,37min means of sml+lrg dur; from Activity for JJ stats.xlsx
 282,LIRS 2016,acantho,CO2,159,15,big,30.70810811,37min means of sml+lrg dur; from Activity for JJ stats.xlsx
-283,LIRS 2016,acantho,CO2,158,15,big,43.67297297,37min means of sml+lrg dur; from Activity for JJ stats.xlsx
+283,LIRS 2016,acantho,CO2,158,15,big,43.672972969999996,37min means of sml+lrg dur; from Activity for JJ stats.xlsx
 284,LIRS 2016,acantho,CO2,164,15,big,41.36486486,37min means of sml+lrg dur; from Activity for JJ stats.xlsx
 285,LIRS 2016,humbug,CO2,160,34,big,55.28648649,37min means of sml+lrg dur; from Activity for JJ stats.xlsx
 286,LIRS 2016,humbug,CO2,259,21,big,35.8027027,37min means of sml+lrg dur; from Activity for JJ stats.xlsx

@@ -135,9 +135,22 @@ data_clean <- data_cleaning[-c(1,2,9)]
 # There should be 6 different species. If no entries are misspelled, there should be 6 levels for species
 str(data_clean)
 
+
 means_temp <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity))
 
 means <- data.frame(unique(means$species), unique(means$meansl), unique(means$meanact))
+
+
+#means <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity))
+
+#head(means_sl)
+
+#means_new <- means %>% expand(species, meansl, meanact)
+
+#(unique(means$species), unique(means$meansl), unique(means$meanact))
+
+#means_new <- data.frame(unique(means$species), unique(means$meansl), unique(means$meanact))
+
 
 # Use flextable to render the summary table in a tidy format
 
@@ -201,6 +214,8 @@ Now, lets create a new figure in the code block below that simplifies the one pr
 
 ```{r, collabFig, echo=TRUE, eval=TRUE}
 # You want to make changes to your collaborators figure in Task 5. Maybe you want to create a figure that focuses only on three fish species instead of the 5. More specifically, chromis, lemon, and acantho. Add code here to revise their figure to do that.
+data3 <- data_clean%>% filter(species == "chromis"|species== "lemon"|species == "acantho")
+ggplot(data = data3, aes(x=treatment,y =activity,fill =species))+geom_boxplot()
 ```
 
 

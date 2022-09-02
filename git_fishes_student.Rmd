@@ -121,17 +121,31 @@ First, write some code below to remove missing data
 
 ```{r, rmMiss}
 # Code to removing missing data from the `OA_activitydat_20190302_BIOL3207.csv` data frame. 
-
+data_cleaning <- filter(data, !is.na(activity))
+data_cleaning <- filter(data_cleaning, !is.na(animal_id)) %>% mutate(across(where(is.character), factor))
 ```
 
 Second, drop out irrelevant columns and check that there are no spelling issues in `species` and `treatment`. Create a table of summary data that includes: 1) the mean, 2) the standard error and 3) the sample sizes of unique fish across ALL six fish species for each treatment. This will also help you detect any spelling errors. You can use the R package [`flextable`](https://ardata-fr.github.io/flextable-book/) to print out the results in a nice neat format! If you haven't heard about `flextable` spend 10 or so minutes having a look at it's functionality. It's incredible! You'll use this for tables throughout.
 
 ```{r summaryTab}
 # Drop irrelevant columns
+#data_clean <- data_cleaning[-c(1,2,9)]
 
 # Check spelling in species and treatment but also generate a summary table
+# There should be 6 different species. If no entries are misspelled, there should be 6 levels for species
+#str(data_clean)
+
+#means <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = #mean(activity))
+#head(means_sl)
+
+#means_new <- means %>% expand(species, meansl, meanact)
+
+#(unique(means$species), unique(means$meansl), unique(means$meanact))
+
+means_new <- data.frame(unique(means$species), unique(means$meansl), unique(means$meanact))
 
 # Use flextable to render the summary table in a tidy format
+
 
 ```
 

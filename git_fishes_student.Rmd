@@ -168,14 +168,14 @@ Ignoring figures can be important because they take up quite a lot of space in y
 
 `.gitignore` files are used to control what *Git* tracks and what it ignores. You should have created a new folder path: `output/figures/`. Write some code now to create a pretty figure using ggplot that shows the difference between control and acidification treatments for each of the fish species in the data set:
 
-```{r, prettyfig, fig.align='center', fig.cap="add a legend here"}
+```{r, prettyfig, fig.align='center', fig.cap="figure 1"}
 # ggplot figure showing mean activity for each treatment (Control, OA) for each species.
 ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_boxplot() + facet_wrap(~species)
 
 ```
 ```{r eval=F}
-ggsave('./output/figures/control.acid.species.newtest.png', width = 6, height = 4)
-# saving this as a different file to see if gitignore will work this time
+# Use ggsave to save the figure
+ggsave('./output/figures/control.acid.species.png', width = 6, height = 4)
 ```
 
 
@@ -186,15 +186,19 @@ Note the code chunk used to make the figure. It has a `fig.cap` argument. That m
 
 Now that you have the figure you may also want to write / save it as a separate file. Use `ggsave` function to save the figure(s) to your new `output/figures/`:
 
-```{r, savefig}
-# Use ggsave to save the figure
+```{r, loadImages}
+acantho <- readPNG("./pics/acantho.png")
+```
 
+
+```{r, savefig}
+ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_boxplot() + facet_wrap(~species) + annotation_raster(acantho, xmin = 3, xmax = 15,ymin = 100, ymax = 75)
 ```
 
 >**Question 6**: Given that you have added `output/figures/` to your `.gitignore` file describe what you notice about what you see in *GitHub Desktop*. 
 
 ```{r}
-## Write your answer here
+## There shouldnt be any figures in that folder on desktop. However I didnt set up the .gitignore file correctly the first time and so ended up with an image in there anyway, and it seems like its not possible to remove it. Additional images are no longer uploaded to that folder now that I've fixed it.
 ```
 
 Last question for this task. I promise! It's important to think very carefully about what you track and ignore.
@@ -202,7 +206,7 @@ Last question for this task. I promise! It's important to think very carefully a
 >**Question 7**: Assume that you added the `pics/` folder to your working directory to plot pictures of each fish on your figure. Do you want to track the files in the pic/ folder on GitHub despite them being .png files? Explain your reasoning. 
 
 ```{r, answer6}
-## Add your answer here
+# The pics folder does need to be tracked on Github. We dont track the figures folder because the figures can be recreated by the code in the r markdown document, but this is not true for the pictures. Much like with the raw data, the code needs existing pictures to be supplied to it.
 ```
 
 # **Task 6**

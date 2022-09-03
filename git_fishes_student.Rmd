@@ -159,7 +159,7 @@ flextable(means[,c(1,6,2,3,7,8)]) %>% set_header_labels(n = "Count")
 >**Question 5**: The new version of your Rmarkdown file should now be up on *GitHub*. In the browser window click on your most recent commit. Have a look at the file versioning system. You will notice two files side-by-side. Describe what you notice is being presented online. What do the red and green highlights mean?
 
 ```{r answer5, echo=TRUE, eval=FALSE}
-## Write your answer here....remember to use '#" in front of your text.
+## The old version of a file is presented on the left-hand-side, and the new version on the right. Red lines in the old file indicate lines which have been changed in the new version, and green lines on the right indicate lines which have been added or changed in the new version.
 ```
 
 # **Task 5**
@@ -170,11 +170,11 @@ Ignoring figures can be important because they take up quite a lot of space in y
 
 ```{r, prettyfig, fig.align='center', fig.cap="add a legend here"}
 # ggplot figure showing mean activity for each treatment (Control, OA) for each species.
-ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_point() + facet_wrap(~species)
+ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_boxplot() + facet_wrap(~species)
 
 ```
 ```{r eval=F}
-ggsave('./output/figures', width = 6, height = 4)
+ggsave('./output/figures/control.acid.species.png', width = 6, height = 4)
 ```
 
 

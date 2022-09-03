@@ -150,7 +150,7 @@ means <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = uni
 
 ```{r}
 # Use flextable to render the summary table in a tidy format
-flextable(means[6|1|2|3|7|8,])
+flextable(means[,c(1,6,2,3,7,8)]) %>% set_header_labels(n = "Count")
 
 ```
 

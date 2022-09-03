@@ -145,12 +145,12 @@ means_temp <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>
 # takes only the unique values from means_temp, and creates a new tibble with them. 
 # Then arranges this new tibble in alphabetical order according to species, and adds a new column containing the number of observations for each species. The output of the count function is in alphabetical order and only has 6 rows, so this needed to be done here and not above.
 # Then calculates the standard errors and adds new columns for them.
-means <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% mutate(Count = count(data_clean, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/Count) %>% mutate(SE.Activity = sdact/Count)
+means <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% cbind(count(data_clean, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/n) %>% mutate(SE.Activity = sdact/n)
 ```
 
 ```{r}
 # Use flextable to render the summary table in a tidy format
-
+flextable(means[6|1|2|3|7|8,])
 
 ```
 

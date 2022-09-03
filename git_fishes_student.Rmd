@@ -174,7 +174,8 @@ ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_boxplot() + facet_
 
 ```
 ```{r eval=F}
-ggsave('./output/figures/control.acid.species.png', width = 6, height = 4)
+ggsave('./output/figures/control.acid.species.newtest.png', width = 6, height = 4)
+# saving this as a different file to see if gitignore will work this time
 ```
 
 

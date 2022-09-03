@@ -53,7 +53,7 @@ This task involves cloning your repository on your computer. Where should we pla
 
 ```{r, answer1, echo=TRUE, eval = FALSE}
 
-## Write your answer here. 
+## I really cannot find an answer to this question that amounts to anything more than "because I said so". Its always seemed perfectly capable as a backup in my experience with it.
 
 ```
 
@@ -64,7 +64,7 @@ Before moving on you might have noticed that the code block above has a name `an
 >**Question 2**: In the second code block called `answer1` if we change echo = TRUE to echo = FALSE what will happen to the code block `answer1` when you render it?
 
 ```{r answer2, echo=TRUE, eval = FALSE}
-# The code block will not be visible in the rendered doccument
+# The code block will not be visible in the rendered document
 ```
 
 
@@ -130,28 +130,25 @@ Second, drop out irrelevant columns and check that there are no spelling issues 
 ```{r summaryTab}
 # Drop irrelevant columns
 data_clean <- data_cleaning[-c(1,2,9)]
+```
 
+```{r}
 # Check spelling in species and treatment but also generate a summary table
 # There should be 6 different species. If no entries are misspelled, there should be 6 levels for species
 str(data_clean)
+```
 
+```{r}
+# Create a temporary tibble which contains data_clean, as well as the means and standard deviations for each species
+means_temp <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity)) %>%  mutate(sdsl = sd(sl)) %>% mutate(sdact = sd(activity))
 
-means_temp <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity))
+# takes only the unique values from means_temp, and creates a new tibble with them. 
+# Then arranges this new tibble in alphabetical order according to species, and adds a new column containing the number of observations for each species. The output of the count function is in alphabetical order and only has 6 rows, so this needed to be done here and not above.
+# Then calculates the standard errors and adds new columns for them.
+means <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% mutate(Count = count(data_clean, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/Count) %>% mutate(SE.Activity = sdact/Count)
+```
 
-means <- data.frame(unique(means$species), unique(means$meansl), unique(means$meanact))
-
-
-#means <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity))
-
-#head(means_sl)
-
-#means_new <- means %>% expand(species, meansl, meanact)
-
-#(unique(means$species), unique(means$meansl), unique(means$meanact))
-
-#means_new <- data.frame(unique(means$species), unique(means$meansl), unique(means$meanact))
-
-
+```{r}
 # Use flextable to render the summary table in a tidy format
 
 
@@ -177,7 +174,7 @@ ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_point() + facet_wr
 
 ```
 ```{r eval=F}
-#ggsave('./output/figures', width = 6, height = 4)
+ggsave('./output/figures', width = 6, height = 4)
 ```
 
 

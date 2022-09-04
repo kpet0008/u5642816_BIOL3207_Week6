@@ -188,12 +188,24 @@ Now that you have the figure you may also want to write / save it as a separate 
 
 ```{r, loadImages}
 acantho <- readPNG("./pics/acantho.png")
+ambon <- readPNG("./pics/ambon.png")
+chromis <- readPNG("./pics/chromis.png")
+humbug <- readPNG("./pics/humbug.png")
+lemon <- readPNG("./pics/lemon.png")
+whitedams <- readPNG("./pics/whitedams.png")
 ```
-
 
 ```{r, savefig}
-ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_boxplot() + facet_wrap(~species) + annotation_raster(acantho, xmin = 3, xmax = 15,ymin = 100, ymax = 75)
+data_clean %>% filter(species == "chromis"|species== "lemon"|species == "humbug") %>% ggplot(aes(species, activity, fill=treatment)) + geom_boxplot() + 
+  annotation_raster(chromis, xmin = 0.7, xmax = 1.2,ymin = 72, ymax = 80) + ylim(15,80) + 
+  annotation_raster(humbug, xmin = 1.7, xmax = 2.2,ymin = 72, ymax = 80) + ylim(15,80) + 
+  annotation_raster(lemon, xmin = 2.7, xmax = 3.2,ymin = 72, ymax = 80) + ylim(15,80)
 ```
+```{r eval=F}
+# Use ggsave to save the figure
+ggsave('./output/figures/species.activity.boxplot.png', width = 6, height = 4)
+```
+
 
 >**Question 6**: Given that you have added `output/figures/` to your `.gitignore` file describe what you notice about what you see in *GitHub Desktop*. 
 

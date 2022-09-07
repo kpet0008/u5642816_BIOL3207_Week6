@@ -146,22 +146,41 @@ data_clean <- data_cleaning[-c(1,2,9)]
 # There should be 6 different species. If no entries are misspelled, there should be 6 levels for species
 str(data_clean)
 ```
-
+### Table for the control group
 ```{r}
 # Create a temporary tibble which contains data_clean, as well as the means and standard deviations for each species
-means_temp <- data_clean %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity)) %>%  mutate(sdsl = sd(sl)) %>% mutate(sdact = sd(activity))
+means_temp <- data_clean %>% filter(treatment == "control") %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity)) %>%  mutate(sdsl = sd(sl)) %>% mutate(sdact = sd(activity))
 
 # takes only the unique values from means_temp, and creates a new tibble with them. 
 # Then arranges this new tibble in alphabetical order according to species, and adds a new column containing the number of observations for each species. The output of the count function is in alphabetical order and only has 6 rows, so this needed to be done here and not above.
 # Then calculates the standard errors and adds new columns for them.
-means <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% cbind(count(data_clean, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/n) %>% mutate(SE.Activity = sdact/n)
+means.control <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% cbind(count(means_temp, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/n) %>% mutate(SE.Activity = sdact/n)
 ```
+
 
 ```{r}
 # Use flextable to render the summary table in a tidy format
-flextable(means[,c(1,6,2,3,7,8)]) %>% set_header_labels(n = "Count")
+flextable(means.control[,c(1,6,2,3,7,8)]) %>% set_header_labels(n = "Count")
 
 ```
+### Table for the CO2 group
+```{r}
+# Create a temporary tibble which contains data_clean, as well as the means and standard deviations for each species
+means_temp <- data_clean %>% filter(treatment == "CO2") %>% group_by(species) %>%  mutate(meansl = mean(sl)) %>%  mutate(meanact = mean(activity)) %>%  mutate(sdsl = sd(sl)) %>% mutate(sdact = sd(activity))
+
+# takes only the unique values from means_temp, and creates a new tibble with them. 
+# Then arranges this new tibble in alphabetical order according to species, and adds a new column containing the number of observations for each species. The output of the count function is in alphabetical order and only has 6 rows, so this needed to be done here and not above.
+# Then calculates the standard errors and adds new columns for them.
+means.CO2 <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% cbind(count(means_temp, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/n) %>% mutate(SE.Activity = sdact/n)
+```
+
+
+```{r}
+# Use flextable to render the summary table in a tidy format
+flextable(means.CO2[,c(1,6,2,3,7,8)]) %>% set_header_labels(n = "Count")
+
+```
+
 
 **STOP**: Before moving on, it's a good time to establish some good *GitHub* practices. You have just done an important step. It's time to save this file, stage it and commit it so that you have a record. Push these changes up using *GitHub Desktop*. It's important to do this frequently. It's probably not needed after every line of code, but it's good to do this when you have completed an important coding step. Of course, there's no harm in doing it more often. It will provide fine-scale tracking for you!
 
@@ -364,7 +383,7 @@ Moving forward on that you can also add in an object and whatever that objects v
 
 This is all **VERY** cool because that means if your code or data change than you can update your entire report very fast. It's also 100% reproducible. We know exactly where every single value in your report comes from. This is all pretty helpful when you want to check your code and report side-by-side. Now that you have a bit more detail fill in the following:
 
-Mean activity for `r "species name here"` in the control group was `r "add code to place mean for control"` (s / min) compared to the OA treatment group, which was `r "mean for acidificaton treatment"` (s / min). The difference between control and OA treatment means was `r "code mean difference bw treatment"` (s / min) (95% CI: `r "code for lower CI"` to `r "code for upper CI"`). 
+Mean activity for `r means$Species[1]` in the control group was `r "means$Mean.Activity[1]"` (s / min) compared to the OA treatment group, which was `r "mean for acidificaton treatment"` (s / min). The difference between control and OA treatment means was `r "code mean difference bw treatment"` (s / min) (95% CI: `r "code for lower CI"` to `r "code for upper CI"`). 
 
 Now, using what you just learnt, describe what the null hypothesis being tested was and provide statistical evidence (t-statistic, df, and p-value) to support your conclusion about whether we can reject the null hypothesis. Again, make sure you use in-line code. Write you answer below:
 

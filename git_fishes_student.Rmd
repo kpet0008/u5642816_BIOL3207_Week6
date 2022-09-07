@@ -30,7 +30,16 @@ Throughout we are also going to learn a bit more about how to format Rmarkdown d
 library(pacman)
 
 # Install bookdown for rendering because we'll need this. While we're at it, lets also install /load the tidyverse
-p_load(bookdown, tidyverse, ggforce, flextable, latex2exp, png, magick) # basically just list all the packages you want here
+## Im not running this every time
+#p_load(bookdown, tidyverse, ggforce, flextable, latex2exp, png, magick) # basically just list all the packages you want here
+
+library(bookdown)
+library(tidyverse)
+library(ggforce)
+library(flextable)
+library(latex2exp)
+library(png)
+library(magick)
 
 ```
 
@@ -265,12 +274,85 @@ Here, run some statistical tests to determine, for each species, whether the con
 >**Stretch Task**: You can of course do this for each species seperately, but those who want a challenge, think about how you might use a loop or even some wrangling methods you have already learnt from the tidyverse to run these tests across all 6 species in a single block of code. If you're familiar with functions, you can even think about writing your own function! All these strategies will avoid having to copy and paste large chunks of code. If you're repeating anything, writing functions and loops are good ways to simplify.
 
 ```{r, stats, echo=TRUE, eval=TRUE}
-# Add your code here
+#first we'll compile the data to make a table about the activity in control vs treatment groups
+#make results object
+results_activity <- tibble(Species = c(1:6),
+  Diff.in.mean = c(1:6),
+  T.stat = c(1:6),
+  P.stat = c(1:6),
+  Conf.Int = c(1:6),
+  df = c(1:6))
+
+#loop 6 times because we have six species
+for(i in 1:6){
+  #filter data by ith level of the species factor
+  temp_data <- filter(data_clean, species == levels(data_clean$species)[i])
+
+  #run stat test with subset
+  temp_test <- t.test(temp_data$activity[temp_data$treatment == "CO2"],temp_data$activity[temp_data$treatment == "control"],var.equal=T)
+  
+  #extract only the information we need and store relevant values in results object
+  #the species name, stored in the first column
+  results_activity$Species[i] <- levels(data_clean$species)[i]
+  #the difference in means, stored in the second column
+  results_activity$Diff.in.mean[i] <- abs(unname(temp_test$estimate)[1]-unname(temp_test$estimate)[2])
+  #the t statistic, stored in the third column
+  results_activity$T.stat[i] <- unname(temp_test$statistic)
+  #the p-value, stored in the fourth column
+  results_activity$P.stat[i] <- temp_test$p.value
+  #the confidence interval, stored in the fifth column
+  #These are being put in one column because its only ever going to be used for displaying the interval in a table
+  results_activity$Conf.Int[i] <- paste(signif(temp_test$conf.int[1],2), signif(temp_test$conf.int[2],2), sep=", ")
+  #The degrees of freedom, stored in the sixth column
+  results_activity$df[i] <- unname(temp_test$parameter)
+}
+
+#next we'll do the same as above, but for length instead of activity
+#make results object
+results_sl <- tibble(Species = c(1:6),
+  Diff.in.mean = c(1:6),
+  T.stat = c(1:6),
+  P.stat = c(1:6),
+  Conf.Int = c(1:6),
+  df = c(1:6))
+
+#loop 6 times because we have six species
+for(i in 1:6){
+  #filter data by ith level of the species factor
+  temp_data <- filter(data_clean, species == levels(data_clean$species)[i])
+
+  #run stat test with subset
+  temp_test <- t.test(temp_data$sl[temp_data$treatment == "CO2"],temp_data$sl[temp_data$treatment == "control"],var.equal=T)
+  
+  #extract only the information we need and store relevant values in results object
+  #the species name, stored in the first column
+  results_sl$Species[i] <- levels(data_clean$species)[i]
+  #the difference in means, stored in the second column
+  results_sl$Diff.in.mean[i] <- abs(unname(temp_test$estimate)[1]-unname(temp_test$estimate)[2])
+  #the t statistic, stored in the third column
+  results_sl$T.stat[i] <- unname(temp_test$statistic)
+  #the p-value, stored in the fourth column
+  results_sl$P.stat[i] <- temp_test$p.value
+  #the confidence interval, stored in the fifth column
+  #These are being put in one column because its only ever going to be used for displaying the interval in a table
+  results_sl$Conf.Int[i] <- paste(signif(temp_test$conf.int[1],2), signif(temp_test$conf.int[2],2), sep=", ")
+  #The degrees of freedom, stored in the sixth column
+  results_sl$df[i] <- unname(temp_test$parameter)
+}
+
 ```
 
-```{r, table1, echo=TRUE, eval=TRUE, tab.cap = "write a caption here"}
+```{r, table1, echo=TRUE, eval=TRUE, tab.cap = "table1"}
 # Using the resulting object created above, which should be a table with all the summary statistics, t, df and p-value for each species create a table. Note that there is a tab.cap argument in the chunk arguments. Write a caption here. 
+## these are different from what was asked for above. So which are we using?
+flextable(results_activity)
 ```
+```{r, table2, echo=TRUE, eval=TRUE, tab.cap = "table2"}
+# Using the resulting object created above, which should be a table with all the summary statistics, t, df and p-value for each species create a table. Note that there is a tab.cap argument in the chunk arguments. Write a caption here. 
+## these are different from what was asked for above. So which are we using?
+flextable(results_sl)
+```
+
 
 Now that you have a table, you can reference it within a document. For example, you can make a call to Table \@ref(tab:table1) by referring to the name of the code chunk. When you knit the html it will create a hyperlink to your table and insert a legend above the table for you. How cool is that!?
 

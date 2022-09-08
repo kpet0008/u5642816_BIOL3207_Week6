@@ -413,17 +413,10 @@ for(i in 1:5000){
 }
 
 #this proportion is our p-value for the permutation analysis
-length(which(samp_dist$extreme)) / length(which(!samp_dist$extreme))
-
+p <- length(which(samp_dist$extreme)) / length(which(!samp_dist$extreme))
+p
 ```
-```{r}
-#A reminder of the real data's t-statistic, for easy comparison
-#filter data by ith level of the species factor
-temp_data <- filter(data_clean, species == levels(data_clean$species)[1])
-#run stat test with subset
-t.test(temp_data$activity[temp_data$treatment == "CO2"],temp_data$activity[temp_data$treatment == "control"],var.equal=T)
-```
-The p-value from the permutation analysis is higher than from the t-test. However, both are too high to reject the null hypothesis regardless/
+The p-value from the permutation analysis, `r p=p; p`, is higher than from the t-test. However, both are too high to reject the null hypothesis regardless.
 
 >**Stretch Task**:  If you really want a challenge try doing permutation tests for each species. Again, loops, functions or tidyverse (or even combinations might help). 
 

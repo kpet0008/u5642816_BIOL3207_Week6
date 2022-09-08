@@ -2,4 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-output
+output/data
+output/figures

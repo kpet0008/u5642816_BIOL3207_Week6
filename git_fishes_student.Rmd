@@ -250,7 +250,7 @@ ggsave('./output/figures/species.activity.boxplot.png', width = 6, height = 4)
 >**Question 6**: Given that you have added `output/figures/` to your `.gitignore` file describe what you notice about what you see in *GitHub Desktop*. 
 
 ```{r}
-## There shouldnt be any figures in that folder on desktop. However I didnt set up the .gitignore file correctly the first time and so ended up with an image in there anyway, and it seems like its not possible to remove it. Additional images are no longer uploaded to that folder now that I've fixed it.
+## There arent be any figures in that folder on desktop.
 ```
 
 Last question for this task. I promise! It's important to think very carefully about what you track and ignore.

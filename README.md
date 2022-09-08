@@ -45,6 +45,8 @@ magick
 
 ### Code Workflow ###
 -----------------------
+The RMD file contains large chunks of plain and markdown text which are not R code. These are not detailed here, because they are just text in plain English.
+
 **Question 3**  
 A file pathway is saved into the object 'path'  
 The data is read using the read_csv function, taking the file from the assigned pathway, and saved into the object 'data'
@@ -71,7 +73,27 @@ After this, another object (means.control or means.CO2, respectively) is created
 
 Then, this data is viewed in a table using flextable.
 
-**Question 5**  
+**Task 5**  
+A six-panel box-plot is created, one panel for each species. Each panel consists of two boxplots of activity, one for each treatment group.  
+This figure is then output to the output/figures folder, with the title 'control.acid.species.png'
+![control acid species](https://user-images.githubusercontent.com/62368915/189127279-18e24128-f85e-40db-8e4f-988e362dc6bf.png)
+
+Into six new objects, named for each of the six species, are saved an image file of each fish. These images are read out of the pics folder.  
+
+A single-panel plot is created, containing boxplots of the activity of three species grouped by treatment group.  
+This plot is annotated with images of each of the three species, above the boxplots representing data for the species.  
+This figure is then output to the output/figures folder, with the title 'species.activity.boxplot.png'. 
+![species activity boxplot](https://user-images.githubusercontent.com/62368915/189127322-b80584d7-03b7-48e3-b683-3f77c1f437c2.png)
+
+
+**Task 6**
+'data_clean' is filted to the species "chromis", "lemon", and "acantho", and is used to create a single-panel figure.
+![colab fig](https://user-images.githubusercontent.com/62368915/189127950-d94d0ad6-119c-49a7-82c2-16e9de48747a.png)
+
+**Task 9**
+
+
+
 
 
 

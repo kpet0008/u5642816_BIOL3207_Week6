@@ -104,7 +104,14 @@ The relevant variables in the temp_test are extracted and stored in the correspo
 After the loops have run, the data within the two results tibbles are displayed in two flextables, as described above.
 
 **Question 8**
+Here, a permutation analysis is conducted for one of the species, acantho, for the difference in activity level between the two treatment groups. This is another method to generate a p-value associated with this difference.  
 
+An object called 'samp_dist' is created, with two columns for each permutation's test statistic, and whether or not this statistic is more extreme than the t-statistic calculated in **Task 9**.  
+5000 permutations are conducted. Accordingly, the samp_dist object has 5000 rows, and a for-loop creating the permutations runs 5000 times.  
+Inside the for-loop, a temporary object, temp_data, is created, and filed with the data for the acantho species, with the treatment column shuffled.  
+A t-test is then conducted in the same manner as in **Task 9**, and the resulting t-statistic is saved in the appropriate row of the samp_dist object.  
+Then, this statistic is compared to the t-statistic calculated in **Task 9**, and a value of TRUE or FALSE is recorded according to whether the permutation statistic is greater in absolute value.  
+Once the loop is completed, the number of TRUE values is divided by the number of FALSE values. This produces a p-statistic.
 
 # Output files
 This project outputs three files, neither of which are included in the repository.  

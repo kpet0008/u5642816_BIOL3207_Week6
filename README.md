@@ -34,13 +34,13 @@ The analysis conducted in this project takes place in a single RMD document, tit
 
 The following libraries are used in this project:  
 --------------------------------------------------
-pacman,  
-bookdown,  
-tidyverse,  
-ggforce,  
-flextable,  
-latex2exp,  
-png,  
+pacman  
+bookdown  
+tidyverse  
+ggforce  
+flextable  
+latex2exp  
+png  
 magick  
 
 ### Code Workflow ###
@@ -86,11 +86,11 @@ This figure is then output to the output/figures folder, with the title 'species
 ![species activity boxplot](https://user-images.githubusercontent.com/62368915/189127322-b80584d7-03b7-48e3-b683-3f77c1f437c2.png)
 
 
-**Task 6**
+**Task 6**  
 'data_clean' is filted to the species "chromis", "lemon", and "acantho", and is used to create a single-panel figure.
 ![colab fig](https://user-images.githubusercontent.com/62368915/189127950-d94d0ad6-119c-49a7-82c2-16e9de48747a.png)
 
-**Task 9**
+**Task 9**  
 A t-test is performed on two continuous variables in the cleaned data (activity and sl), and its results displayed in two tables. These tables contain one row representing each species, with columns for species name, difference in mean, t-statistic, p-statistic, confidence interval, and degrees of freedom.  
 
 In order to achieve this, a for-loop is used.  
@@ -103,7 +103,7 @@ Another temporary object, 'temp_test', is then created and filled with the resul
 The relevant variables in the temp_test are extracted and stored in the corresponding results tibble.  
 After the loops have run, the data within the two results tibbles are displayed in two flextables, as described above.
 
-**Question 8**
+**Question 8**  
 Here, a permutation analysis is conducted for one of the species, acantho, for the difference in activity level between the two treatment groups. This is another method to generate a p-value associated with this difference.  
 
 An object called 'samp_dist' is created, with two columns for each permutation's test statistic, and whether or not this statistic is more extreme than the t-statistic calculated in **Task 9**.  
@@ -113,7 +113,8 @@ A t-test is then conducted in the same manner as in **Task 9**, and the resultin
 Then, this statistic is compared to the t-statistic calculated in **Task 9**, and a value of TRUE or FALSE is recorded according to whether the permutation statistic is greater in absolute value.  
 Once the loop is completed, the number of TRUE values is divided by the number of FALSE values. This produces a p-statistic.
 
-# Output files
+# Output files  
+-----------------------
 This project outputs three files, neither of which are included in the repository.  
   
 OA_activitydat_20190302_BIOL3207_output.csv is output into output/data.  

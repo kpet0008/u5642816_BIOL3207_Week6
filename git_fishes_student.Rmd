@@ -114,8 +114,9 @@ Let's say that you added a new data folder that was inside an output folder (i.e
 >**Question 4**: Using the `write_csv` function how would you write the path name to save this file to `output/data`?
 
 ```{r, write, eval = TRUE, echo=TRUE}
+#why is this question here and not *after* the data has been cleaned?
 
-path <- "./output/data/OA_activitydat_20190302_BIOL3207.csv"
+path <- "./output/data/OA_activitydat_20190302_BIOL3207_output.csv"
 
 write_csv(data, file = path)
 
@@ -137,8 +138,9 @@ data_cleaning <- filter(data_cleaning, !is.na(animal_id)) %>% mutate(across(wher
 Second, drop out irrelevant columns and check that there are no spelling issues in `species` and `treatment`. Create a table of summary data that includes: 1) the mean, 2) the standard error and 3) the sample sizes of unique fish across ALL six fish species for each treatment. This will also help you detect any spelling errors. You can use the R package [`flextable`](https://ardata-fr.github.io/flextable-book/) to print out the results in a nice neat format! If you haven't heard about `flextable` spend 10 or so minutes having a look at it's functionality. It's incredible! You'll use this for tables throughout.
 
 ```{r summaryTab}
-# Drop irrelevant columns
-data_clean <- data_cleaning[-c(1,2,9)]
+# Drop irrelevant columns, which is most of them
+# Only keeping species, treatment, sl, and activity
+data_clean <- data_cleaning[-c(1,2,5,7,9)]
 ```
 
 ```{r}
@@ -146,6 +148,16 @@ data_clean <- data_cleaning[-c(1,2,9)]
 # There should be 6 different species. If no entries are misspelled, there should be 6 levels for species
 str(data_clean)
 ```
+```{r, writeCleaned, eval = TRUE, echo=TRUE}
+#Im repeating this block down here because this is where it probably should be
+
+path <- "./output/data/OA_activitydat_20190302_BIOL3207_output.csv"
+
+write_csv(data, file = path)
+
+```
+
+
 ### Table for the control group
 ```{r}
 # Create a temporary tibble which contains data_clean, as well as the means and standard deviations for each species

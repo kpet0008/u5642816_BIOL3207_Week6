@@ -91,10 +91,19 @@ This figure is then output to the output/figures folder, with the title 'species
 ![colab fig](https://user-images.githubusercontent.com/62368915/189127950-d94d0ad6-119c-49a7-82c2-16e9de48747a.png)
 
 **Task 9**
+A t-test is performed on two continuous variables in the cleaned data (activity and sl), and its results displayed in two tables. These tables contain one row representing each species, with columns for species name, difference in mean, t-statistic, p-statistic, confidence interval, and degrees of freedom.  
 
+In order to achieve this, a for-loop is used.  
+First, tibbles to store the results are created, called results_activity and results_sl. This object contains the aforementioned columns and six rows.
+An identically-structured loop is run for each of the two treatment groups. The only difference between the two loops is which continuous variable is tested.  
 
+Each of the two loops runs six times, each time corresponding to one of the six species.  
+Within the loop, first a temporary object called 'temp_data' is created and filled with the data for the corresponding species.  
+Another temporary object, 'temp_test', is then created and filled with the results of a t-test with equal variance (variances were confirmed to be identical in a test not included in this RMD file), comparing the two treatment groups.  
+The relevant variables in the temp_test are extracted and stored in the corresponding results tibble.  
+After the loops have run, the data within the two results tibbles are displayed in two flextables, as described above.
 
-
+**Question 8**
 
 
 # Output files

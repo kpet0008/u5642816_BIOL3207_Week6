@@ -30,6 +30,48 @@ were used. Any rows in these columns containing an NA value were also dropped.
 Images featuring each of the six fish species included in the study were also sourced from Clark et al, 2020, and are stored in the ‘pics’ folder.
 						
 # Script files			
+The analysis conducted in this project takes place in a single RMD document, titled 'git_fishes_student'
+
+The following libraries are used in this project:  
+--------------------------------------------------
+pacman,  
+bookdown,  
+tidyverse,  
+ggforce,  
+flextable,  
+latex2exp,  
+png,  
+magick  
+
+### Code Workflow ###
+-----------------------
+**Question 3**  
+A file pathway is saved into the object 'path'  
+The data is read using the read_csv function, taking the file from the assigned pathway, and saved into the object 'data'
+
+**Question 4**  
+A new file pathway is saved into the object 'path'  
+The object 'data' is output to the assigned pathway.  
+
+**Task 4**  
+Across several coding blocks, the data is cleaned.  
+
+First, rows with NA values are removed, and character variables are converted to factors.  
+
+In the second coding block, all unnecessary columns are removed, leaving only ‘species’, ‘treatment’, ‘sl’, and ‘activity’. This is saved to the object 'data_clean'.  
+
+In the third coding block, the structure of the cleaned data is viewed. We can see that the 'species' and 'treatment' columns contain 6 levels and 2 levels respectively, which is expected. This tells us that there are no typos in the data.
+
+In the fourth block, the cleaned data is saved to the output to the output folder. This overrides the output in Question 4.  
+
+In the next four coding blocks, the data is divided into the control and treatment groups, and summary statistics are viewed in tables.  These two blocks follow the same structure.  
+An object called 'mean_temp' is created. To fill this object, data_clean is first filtered by treatment group, and grouped by species. Then new columns for the means of sl and activity, and the standard errors of sl and activity, are created and filled with the means and standard errors for each species. This object has the same number of rows as data_clean, so each row with the same species contains the same value in the new columns.  
+
+After this, another object (means.control or means.CO2, respectively) is created, and filled with only the unique values from 'mean_temp'. This reduces the data down to six rows, representing each species.  
+
+Then, this data is viewed in a table using flextable.
+
+**Question 5**  
 
 
 

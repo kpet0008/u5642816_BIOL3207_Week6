@@ -1,7 +1,5 @@
-# u5642816_BIOL3207_Week6
-##################			
-# DATA files			
-##################			
+# u5642816_BIOL3207_Week6	
+# DATA files				
 Provide details about the workflow (i.e., which files are used, when and why) and write a detailed description of the data file used. Include the details about what the column means and which data file someone should use. 
 
 Data was acquired from:

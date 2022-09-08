@@ -167,10 +167,7 @@ means_temp <- data_clean %>% filter(treatment == "control") %>% group_by(species
 # Then arranges this new tibble in alphabetical order according to species, and adds a new column containing the number of observations for each species. The output of the count function is in alphabetical order and only has 6 rows, so this needed to be done here and not above.
 # Then calculates the standard errors and adds new columns for them.
 means.control <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% cbind(count(means_temp, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/n) %>% mutate(SE.Activity = sdact/n)
-```
 
-
-```{r}
 # Use flextable to render the summary table in a tidy format
 flextable(means.control[,c(1,6,2,3,7,8)]) %>% set_header_labels(n = "Count")
 
@@ -184,10 +181,7 @@ means_temp <- data_clean %>% filter(treatment == "CO2") %>% group_by(species) %>
 # Then arranges this new tibble in alphabetical order according to species, and adds a new column containing the number of observations for each species. The output of the count function is in alphabetical order and only has 6 rows, so this needed to be done here and not above.
 # Then calculates the standard errors and adds new columns for them.
 means.CO2 <- tibble(Species = unique(means_temp$species), Mean.Standard.Length = unique(means_temp$meansl), Mean.Activity = unique(means_temp$meanact), sdsl = unique(means_temp$sdsl), sdact = unique(means_temp$sdact)) %>% arrange(Species) %>% cbind(count(means_temp, species)[,2]) %>% mutate(SE.Standard.Length = sdsl/n) %>% mutate(SE.Activity = sdact/n)
-```
 
-
-```{r}
 # Use flextable to render the summary table in a tidy format
 flextable(means.CO2[,c(1,6,2,3,7,8)]) %>% set_header_labels(n = "Count")
 
@@ -210,7 +204,7 @@ Ignoring figures can be important because they take up quite a lot of space in y
 
 ```{r, prettyfig, fig.align='center', fig.cap="figure 1"}
 # ggplot figure showing mean activity for each treatment (Control, OA) for each species.
-ggplot(data_clean, aes(activity, sl, color=treatment)) + geom_boxplot() + facet_wrap(~species)
+ggplot(data_clean, aes(treatment, activity, color=treatment)) + geom_boxplot() + facet_wrap(~species)
 
 ```
 ```{r eval=F}
@@ -271,7 +265,10 @@ Now, lets create a new figure in the code block below that simplifies the one pr
 data3 <- data_clean%>% filter(species == "chromis"|species== "lemon"|species == "acantho")
 ggplot(data = data3, aes(x=treatment,y =activity,fill =species))+geom_boxplot()
 ```
-
+```{r eval=F}
+# Use ggsave to save the figure
+ggsave('./output/figures/colab.fig.png', width = 6, height = 4)
+```
 
 # **Task 7**
 This task involves creating and resolving conflicts. Conflicts in files are denoted with specific markers. They look like this when you open a file with conflicts.
